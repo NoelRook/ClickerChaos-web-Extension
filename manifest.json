@@ -3,7 +3,8 @@
     "name": "Website Blocker",
     "version": "1.0",
     "description": "Blocks specific websites to help you stay focused.",
-    "permissions": ["declarativeNetRequest", "storage"],
+    "permissions": ["declarativeNetRequest", "storage", "tabs"],
+    "background": {"service_worker": "tabswitcher.js"},
     "host_permissions": ["*://*/*"],
     "options_page": "index.html",
     "declarative_net_request": {
@@ -19,6 +20,8 @@
         "default_popup": "index.html",
         "default_title": "Productivity Mode"
     }
+
+    
     
   }
   
