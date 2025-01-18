@@ -22,3 +22,5 @@ chrome.storage.onChanged.addListener((changes) => {
     blockedSites = changes.blockedSites.newValue;
   }
 });
+
+"i love life"
