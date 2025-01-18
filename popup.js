@@ -14,12 +14,18 @@ chrome.storage.sync.get(["extensionEnabled", "productiveMode", "blockedSites"], 
 
   // Load the blocked sites into the textarea
   sitesTextarea.value = data.blockedSites ? data.blockedSites.join("\n") : "";
+
+  // Disable the second toggle if the first toggle is off
+  toggleModeControl(extensionToggle.checked);
 });
 
 // Save the state of the extension and mode toggle switches when changed
 document.getElementById("extensionToggle").addEventListener("change", (event) => {
   const extensionEnabled = event.target.checked;
   chrome.storage.sync.set({ extensionEnabled });
+
+  // Disable/enable the mode toggle based on the extension toggle state
+  toggleModeControl(extensionEnabled);
 });
 
 document.getElementById("modeToggle").addEventListener("change", (event) => {
@@ -62,3 +68,16 @@ document.getElementById("clear").addEventListener("click", () => {
   document.getElementById("sites").value = "";
   alert("Blocked sites cleared!");
 });
+
+// Function to disable/enable the mode toggle based on the extension toggle state
+function toggleModeControl(isEnabled) {
+  const modeToggle = document.getElementById("modeToggle");
+  const modeLabel = document.getElementById("modeLabel");
+
+  if (isEnabled) {
+    modeToggle.disabled = false;
+  } else {
+    modeToggle.disabled = true;
+    modeLabel.textContent = "Unproductive Mode"; // Reset label when extension is off
+  }
+}
