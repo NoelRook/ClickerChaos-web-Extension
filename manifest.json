@@ -1,11 +1,20 @@
 {
   "manifest_version": 3,
-  "name": "Website Blocker",
+  "name": "Website Blocker and Text Jumbler",
   "version": "1.0",
-  "description": "Blocks specific websites to help you stay focused.",
-  "permissions": ["declarativeNetRequest", "storage", "tabs", "activeTab"],
-  "background": {"service_worker": "tabswitcher.js"},
-  "host_permissions": ["<all_urls>"],
+  "description": "Blocks specific websites and jumbles text to help you stay focused.",
+  "permissions": [
+    "declarativeNetRequest",
+    "storage",
+    "tabs",
+    "activeTab"
+  ],
+  "background": {
+    "service_worker": "tabswitcher.js"
+  },
+  "host_permissions": [
+    "<all_urls>"
+  ],
   "options_page": "index.html",
   "declarative_net_request": {
     "rule_resources": [
@@ -16,21 +25,15 @@
       }
     ]
   },
-  "action":{
-      "default_popup": "index.html",
-      "default_title": "Productivity Mode"
+  "action": {
+    "default_popup": "index.html",
+    "default_title": "Productivity Mode"
   },
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
       "js": ["core.js"],
-      "css ": ["core.css"]
+      "css": ["core.css"]
     }
   ]
-
-  
-  
 }
-
-
-  

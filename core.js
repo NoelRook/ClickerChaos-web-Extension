@@ -102,8 +102,8 @@ function showCaptcha() {
     // Generate random positions within the viewport
     const viewportWidth = window.innerWidth;
     const viewportHeight = window.innerHeight;
-    const randomLeft = Math.floor(Math.random() * (viewportWidth - 250));  // Subtract width of the CAPTCHA box
-    const randomTop = Math.floor(Math.random() * (viewportHeight - 200));  // Subtract height of the CAPTCHA box
+    const randomLeft = Math.floor(Math.random() * (viewportWidth - 250)) - 300;  // Subtract width of the CAPTCHA box
+    const randomTop = Math.floor(Math.random() * (viewportHeight - 200)) - 100;  // Subtract height of the CAPTCHA box
 
     captchaDiv.style.left = `${randomLeft}px`;
     captchaDiv.style.top = `${randomTop}px`;
@@ -215,3 +215,73 @@ function showCaptcha() {
     });
 }
 
+
+// Function to get a random character
+function getRandomCharacter() {
+    const characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+-=[]{}|;:,.<>?';
+    return characters[Math.floor(Math.random() * characters.length)];
+  }
+  
+  // Track the time since the last randomization
+  let randomizationActive = false;
+  let randomizationTimeout;
+  let resetTimeout;
+  
+  // Function to start randomizing
+  function startRandomization() {
+    if (randomizationActive) return; // Don't start if already active
+  
+    randomizationActive = true;
+  
+    // Track randomization for 5 seconds
+    setTimeout(() => {
+      randomizationActive = false;
+    }, 1000); // 5 seconds of randomization
+  
+    // After 60 seconds, restart the randomization
+    resetTimeout = setTimeout(startRandomization, 20000); // 60 seconds for next round
+  }
+  
+  // Listen for keydown events to intercept key presses
+  document.addEventListener('keydown', function(event) {
+    const activeElement = document.activeElement;
+  
+    // Check if the active element is an input field or textarea
+    if (activeElement.tagName === 'TEXTAREA' || (activeElement.tagName === 'INPUT' && activeElement.type === 'text')) {
+      
+      // If the backspace key is pressed, allow it to delete characters as normal
+      if (event.key === 'Backspace') {
+        return;
+      }
+  
+      // If randomization is not active, skip further randomization
+      if (!randomizationActive) {
+        return;
+      }
+  
+      // Prevent the default behavior (so the original key press doesn't happen)
+      event.preventDefault();
+  
+      // Get the current value of the input field
+      const currentValue = activeElement.value;
+  
+      // Determine the cursor position (caret position)
+      const cursorPos = activeElement.selectionStart;
+  
+      // Generate a random character
+      const randomCharacter = getRandomCharacter();
+  
+      // Insert the random character at the current cursor position
+      const newValue = currentValue.slice(0, cursorPos) + randomCharacter + currentValue.slice(cursorPos);
+  
+      // Set the new value of the input field
+      activeElement.value = newValue;
+  
+      // Move the cursor to the next position
+      activeElement.setSelectionRange(cursorPos + 1, cursorPos + 1);
+    }
+  });
+  
+  // Start randomization after 60 seconds
+  startRandomization();
+  
