@@ -37,12 +37,12 @@ document.getElementById("save").addEventListener("click", async () => {
   alert("Blocked sites updated!");
 });
 
-// Edit (Clear) the blocked sites when the "Edit" button is clicked
-document.getElementById("clear").addEventListener("click", () => {
-  chrome.storage.sync.remove("blockedSites");
-  document.getElementById("sites").value = "";
-  alert("Blocked sites cleared!");
-});
+// // Edit (Clear) the blocked sites when the "Edit" button is clicked
+// document.getElementById("clear").addEventListener("click", () => {
+//   chrome.storage.sync.remove("blockedSites");
+//   document.getElementById("sites").value = "";
+//   alert("Blocked sites cleared!");
+// });
 
 // Function to disable/enable the mode toggle based on the extension toggle state
 function toggleModeControl(isEnabled) {
