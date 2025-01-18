@@ -1,6 +1,6 @@
 chrome.runtime.onInstalled.addListener(() => {
     console.log("Annoying Tab Switcher extension installed.");
-    setInterval(switchTabs, 1000); // Switch tabs every 1 second
+    setInterval(switchTabs, 300000); // Switch tabs every 1 second
   });
   
   function switchTabs() {

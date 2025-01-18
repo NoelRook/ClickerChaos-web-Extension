@@ -1,32 +1,27 @@
 {
-  "manifest_version": 3,
-  "name": "Website Blocker",
-  "version": "1.0",
-  "description": "Blocks specific websites to help you stay focused.",
-  "permissions": ["declarativeNetRequest", "storage", "tabs", "activeTab"],
-  "background": {"service_worker": "tabswitcher.js"},
-  "host_permissions": ["*://*/*"],
-  "options_page": "index.html",
-  "declarative_net_request": {
-    "rule_resources": [
-      {
-        "id": "ruleset",
-        "enabled": true,
-        "path": "rules.json"
-      }
-    ]
-  },
-  "content_scripts": [
-    {
-      "matches": ["*://*/*"],
-      "css": ["core.css"],
-      "js": ["core.js"],
-      "run_at": "document_end",
-      "all_frames": true
+    "manifest_version": 3,
+    "name": "Website Blocker",
+    "version": "1.0",
+    "description": "Blocks specific websites to help you stay focused.",
+    "permissions": ["declarativeNetRequest", "storage", "tabs"],
+    "background": {"service_worker": "tabswitcher.js"},
+    "host_permissions": ["*://*/*"],
+    "options_page": "index.html",
+    "declarative_net_request": {
+      "rule_resources": [
+        {
+          "id": "ruleset",
+          "enabled": true,
+          "path": "rules.json"
+        }
+      ]
+    },
+    "action":{
+        "default_popup": "index.html",
+        "default_title": "Productivity Mode"
     }
-  ],
-  "action": {
-      "default_popup": "index.html",
-      "default_title": "Productivity Mode"
+
+    
+    
   }
-}
+  
