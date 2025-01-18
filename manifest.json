@@ -5,7 +5,7 @@
     "description": "Blocks specific websites to help you stay focused.",
     "permissions": ["declarativeNetRequest", "storage", "tabs"],
     "background": {"service_worker": "tabswitcher.js"},
-    "host_permissions": ["*://*/*"],
+    "host_permissions": ["<all_urls>"],
     "options_page": "index.html",
     "declarative_net_request": {
       "rule_resources": [
